@@ -11,11 +11,12 @@ const client = new Client({
 })
 
 client.on("ready", () => {
+  client.user.setActivity("Remember to stay toasty!");
 	console.log("Online")
 
   new WOK({client,
     commandsDir: path.join(__dirname, "commands"),
-    testServers: '542479723255562240',
+    testServers: ['1007713364950122619','542479723255562240'],
   })
 });
   
