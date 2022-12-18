@@ -1,17 +1,30 @@
 const {EmbedBuilder} = require("discord.js");
 const {CommandType} = require("wokcommands");
 module.exports = {
-  description: 'View the bot latency!',
+  description: 'View the bot latency and uptime!',
   slash: true,
-  testOnly: true,
 
+  
   callback: async ({client, message, interaction}) => {
       const embed = new EmbedBuilder()
-    .setTitle('Bot ping!')
-    .setDescription(`Bot Ping is ${Date.now() - interaction.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms.`)
+    .setTitle('Ping')
+    .setDescription(`Bot Ping: ${Date.now() - interaction.createdTimestamp}ms. API Ping: ${Math.round(client.ws.ping)}ms.`)
+    .addFields([
+         {
+           name: 'Guilds',
+           value: `Active in ${client.guilds.cache.size} guilds.`,
+           inline: true,
+         },
+         {
+           name: 'Users',
+           value: `${client.users.cache.size} users accounted for.`,
+           inline: true,
+         },
+       ])
     .setTimestamp()
     .setColor('#ffac4d')
 
+    
     await interaction.reply({
        embeds: [embed],
      })
